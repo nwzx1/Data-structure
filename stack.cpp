@@ -66,9 +66,10 @@ int main() {
   MyStack stack(20);
   stack.push(10);
   stack.push(20);
+  stack.push(50);
   int poped = stack.pop();
   stack.display();
-  cout << poped << endl;
+  cout << "popped elemet is :> "<<poped << endl;
 
   return 0;
 }
