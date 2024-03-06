@@ -3,53 +3,72 @@
 using namespace std;
 
 class MyStack {
+
 private:
   struct Stack {
     int size;
     int top;
-    int * next;
+    int *next;
   };
 
-  struct Stack *s;
+  struct Stack *s = (struct Stack *)malloc(sizeof(struct Stack));
+
+  auto isEmpty() -> int {
+    if (s->top != -1) {
+      return 0;
+    } else {
+      return 1;
+    }
+  };
+  auto isFull() -> int {
+    if (s->top == s->size - 1) {
+      return 1;
+    } else {
+      return 0;
+    }
+  };
 
 public:
-
   MyStack(int size) {
     s->size = size;
     s->top = -1;
     s->next = (int *)malloc(s->size * sizeof(int));
   };
 
-  auto isEmpty() -> int {
-    if(s->top != -1) {
-        cout<< "Stack is not empty Empty"<<endl;
-        return 0;
+  auto push(int value) -> void {
+    if (this->isFull()) {
+      cout << "Stack is full" << endl;
     } else {
-        cout<< "Stack is Empty"<<endl;
-        return 1;
-    }
-  };
-  auto isFull() -> int {
-    if(s->top == s->size) {
-        cout<< "Stack is full"<<endl;
-        return 0;
-    } else {
-        cout<< "Stack is not full"<<endl;
-        return 1;
+      s->top++;
+      s->next[s->top] = value;
     }
   };
 
-  auto push() -> void {
-    
+  auto pop() -> int {
+    if (this->isEmpty()) {
+      cout << "Overflow!!!" << endl;
+      return -1;
+    } else {
+      int val = s->next[s->top];
+      s->top = s->top - 1;
+      return val;
+    }
   };
 
+  auto display() -> void {
+    for (int i = 0; i <= s->top; i++) {
+      cout << s->next[i] << endl;
+    }
+  };
 };
 
 int main() {
   MyStack stack(20);
-  auto ans = stack.isEmpty();
-  cout<<ans<<endl;
-
+  stack.push(10);
+  stack.push(20);
+  int poped = stack.pop();
+  stack.display();
+  cout << poped << endl;
 
   return 0;
 }
