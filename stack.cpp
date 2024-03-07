@@ -1,3 +1,4 @@
+#include <array>
 #include <cstdlib>
 #include <iostream>
 using namespace std;
@@ -35,12 +36,14 @@ public:
     s->next = (int *)malloc(s->size * sizeof(int));
   };
 
-  auto push(int value) -> void {
+  auto push(int value) -> int {
     if (this->isFull()) {
       cout << "Stack is full" << endl;
+      return 1;
     } else {
       s->top++;
       s->next[s->top] = value;
+      return 0;
     }
   };
 
@@ -51,6 +54,7 @@ public:
     } else {
       int val = s->next[s->top];
       s->top = s->top - 1;
+      // cout << "popped elemet is :> "<<val << endl;
       return val;
     }
   };
@@ -60,6 +64,7 @@ public:
       cout << s->next[i] << endl;
     }
   };
+
 };
 
 int main() {
@@ -67,9 +72,13 @@ int main() {
   stack.push(10);
   stack.push(20);
   stack.push(50);
-  int poped = stack.pop();
+  stack.push(60);
+  stack.push(70);
+  stack.push(90);
+  stack.push(40);
+  stack.push(30);
+  stack.pop();
   stack.display();
-  cout << "popped elemet is :> "<<poped << endl;
 
   return 0;
 }
