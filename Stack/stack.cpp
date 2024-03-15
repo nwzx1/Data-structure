@@ -1,6 +1,7 @@
 #include <array>
 #include <cstdlib>
 #include <iostream>
+#include <iterator>
 using namespace std;
 
 class MyStack {
@@ -68,17 +69,34 @@ public:
 };
 
 int main() {
-  MyStack stack(20);
-  stack.push(10);
-  stack.push(20);
-  stack.push(50);
-  stack.push(60);
-  stack.push(70);
-  stack.push(90);
-  stack.push(40);
-  stack.push(30);
-  stack.pop();
-  stack.display();
+  // MyStack stack(20);
+  // stack.push(10);
+  // stack.push(20);
+  // stack.push(50);
+  // stack.push(60);
+  // stack.push(70);
+  // stack.push(90);
+  // stack.push(40);
+  // stack.push(30);
+  // stack.pop();
+  // stack.display();
+
+  int arr[8] = {11,7,17,3,9,29,85,9};
+  
+
+  for(int i = 1; i < size(arr); i++) {
+    int temp = arr[i];
+    int j = i-1;
+
+    while(j>=0 && arr[j] > temp) {
+      arr[j+1] = arr[j];
+      j--;
+    }
+  }
+
+  for(int i = 0 ;i < size(arr);i++) {
+    cout <<arr[i]<<endl;
+  }
 
   return 0;
 }
